@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 11, 2024 at 08:45 AM
+-- Generation Time: Feb 11, 2024 at 11:49 AM
 -- Server version: 8.0.30
 -- PHP Version: 7.4.33
 
@@ -64,15 +64,17 @@ CREATE TABLE `users` (
   `password` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `type` tinyint(1) NOT NULL DEFAULT '2' COMMENT '1+admin , 2 = users',
   `has_voted` tinyint(1) DEFAULT '0',
-  `picture_path` text COLLATE utf8mb4_general_ci NOT NULL
+  `picture_path` text COLLATE utf8mb4_general_ci NOT NULL,
+  `department` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `picture_data` mediumblob
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `username`, `password`, `type`, `has_voted`, `picture_path`) VALUES
-(1, 'Administrator', '01-2019-117', 'admin', 1, 0, 'image/3.png');
+INSERT INTO `users` (`id`, `name`, `username`, `password`, `type`, `has_voted`, `picture_path`, `department`, `picture_data`) VALUES
+(1, 'Administrator', '01-2019-117', 'admin', 1, 0, 'image/3.png', NULL, NULL);
 
 -- --------------------------------------------------------
 
