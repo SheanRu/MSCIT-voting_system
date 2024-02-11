@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 07, 2023 at 08:01 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: localhost:3306
+-- Generation Time: Feb 11, 2024 at 08:45 AM
+-- Server version: 8.0.30
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `votingfull`
+-- Database: `votingfull_db`
 --
 
 -- --------------------------------------------------------
@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `category_list` (
-  `id` int(30) NOT NULL,
-  `category` text NOT NULL
+  `id` int NOT NULL,
+  `category` text COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -58,13 +58,13 @@ INSERT INTO `category_list` (`id`, `category`) VALUES
 --
 
 CREATE TABLE `users` (
-  `id` int(30) NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `type` tinyint(1) NOT NULL DEFAULT 2 COMMENT '1+admin , 2 = users',
-  `has_voted` tinyint(1) DEFAULT 0,
-  `picture_path` text NOT NULL
+  `id` int NOT NULL,
+  `name` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `username` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `type` tinyint(1) NOT NULL DEFAULT '2' COMMENT '1+admin , 2 = users',
+  `has_voted` tinyint(1) DEFAULT '0',
+  `picture_path` text COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -72,21 +72,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `password`, `type`, `has_voted`, `picture_path`) VALUES
-(1, 'Administrator', '01-2359-235', '21232f297a57a5a743894a0e4a801fc3', 1, 0, 'image/3.png'),
-(23, 'Daruis Perez', '20-1251-151', '', 2, 0, ''),
-(64, 'Albert cayabyab', '20-0180-985', '', 2, 0, ''),
-(65, 'Aldwin Lester Solis', '20-0551-153', '', 2, 1, ''),
-(66, 'Jake P. Terrado ', '20-0184-374', '', 2, 0, ''),
-(67, 'Jeffrey S Ferrer', '20-0272-380', '', 2, 0, ''),
-(68, 'Diejay Vench C. Frias', '20-0189-275', '', 2, 0, ''),
-(69, 'Jhon Fherson P Fernandez', '20-0182-884', '', 2, 0, ''),
-(70, 'Mark Jhon F. Andaya', '20-0186-683', '', 2, 0, ''),
-(71, 'Richel Kirstine I. De Guzman', '20-0170-642', '', 2, 0, ''),
-(72, 'Jeraiza P. Montoya ', '20-0163-174', '', 2, 1, ''),
-(73, 'Francien Eunice Felix ', '20-0819-337', '', 2, 0, ''),
-(74, ' Angelo Paramio', '20-0820-213', '', 2, 0, ''),
-(75, 'Manilyn Omagtang', '20-0474-559', '', 2, 0, ''),
-(76, 'Daruis Perez', '19-1462-279', '', 2, 0, '');
+(1, 'Administrator', '01-2019-117', 'admin', 1, 0, 'image/3.png');
 
 -- --------------------------------------------------------
 
@@ -95,11 +81,11 @@ INSERT INTO `users` (`id`, `name`, `username`, `password`, `type`, `has_voted`, 
 --
 
 CREATE TABLE `votes` (
-  `id` int(255) NOT NULL,
-  `voting_id` int(255) NOT NULL,
-  `category_id` int(255) NOT NULL,
-  `voting_opt_id` int(255) NOT NULL,
-  `user_id` int(255) NOT NULL
+  `id` int NOT NULL,
+  `voting_id` int NOT NULL,
+  `category_id` int NOT NULL,
+  `voting_opt_id` int NOT NULL,
+  `user_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -212,10 +198,10 @@ INSERT INTO `votes` (`id`, `voting_id`, `category_id`, `voting_opt_id`, `user_id
 --
 
 CREATE TABLE `voting_cat_settings` (
-  `id` int(30) NOT NULL,
-  `voting_id` int(30) NOT NULL,
-  `category_id` int(30) NOT NULL,
-  `max_selection` int(10) NOT NULL
+  `id` int NOT NULL,
+  `voting_id` int NOT NULL,
+  `category_id` int NOT NULL,
+  `max_selection` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -239,11 +225,11 @@ INSERT INTO `voting_cat_settings` (`id`, `voting_id`, `category_id`, `max_select
 --
 
 CREATE TABLE `voting_list` (
-  `id` int(30) NOT NULL,
-  `title` varchar(250) NOT NULL,
-  `description` text NOT NULL,
+  `id` int NOT NULL,
+  `title` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text COLLATE utf8mb4_general_ci NOT NULL,
   `time_duration` time NOT NULL,
-  `is_default` tinyint(1) NOT NULL DEFAULT 0
+  `is_default` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -262,11 +248,11 @@ INSERT INTO `voting_list` (`id`, `title`, `description`, `time_duration`, `is_de
 --
 
 CREATE TABLE `voting_logs` (
-  `id` int(11) NOT NULL,
-  `voter_id` int(11) DEFAULT NULL,
-  `candidate_id` int(11) DEFAULT NULL,
-  `category_id` int(11) DEFAULT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
+  `id` int NOT NULL,
+  `voter_id` int DEFAULT NULL,
+  `candidate_id` int DEFAULT NULL,
+  `category_id` int DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -276,12 +262,12 @@ CREATE TABLE `voting_logs` (
 --
 
 CREATE TABLE `voting_opt` (
-  `id` int(30) NOT NULL,
-  `voting_id` int(30) NOT NULL,
-  `category_id` int(30) NOT NULL,
-  `image_path` text NOT NULL,
-  `opt_txt` text NOT NULL,
-  `motto` varchar(255) NOT NULL
+  `id` int NOT NULL,
+  `voting_id` int NOT NULL,
+  `category_id` int NOT NULL,
+  `image_path` text COLLATE utf8mb4_general_ci NOT NULL,
+  `opt_txt` text COLLATE utf8mb4_general_ci NOT NULL,
+  `motto` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -416,43 +402,43 @@ ALTER TABLE `voting_opt`
 -- AUTO_INCREMENT for table `category_list`
 --
 ALTER TABLE `category_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT for table `voting_cat_settings`
 --
 ALTER TABLE `voting_cat_settings`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `voting_list`
 --
 ALTER TABLE `voting_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `voting_logs`
 --
 ALTER TABLE `voting_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `voting_opt`
 --
 ALTER TABLE `voting_opt`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
